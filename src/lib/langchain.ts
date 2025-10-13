@@ -1,4 +1,3 @@
-import { ChatOpenAI } from "langchain/chat_models/openai";
 import { HumanMessage, SystemMessage } from "langchain/schema";
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
@@ -12,6 +11,7 @@ import {
   UnstyledDescriptionSchema,
   UnstyledSubtitleSchema,
 } from "@/lib/validation/text-schema";
+import { createOpenRouterClient } from "./openrouter";
 
 const carouselFunctionSchema = {
   name: "carouselCreator",
@@ -27,11 +27,12 @@ const carouselFunctionSchema = {
 
 export async function generateCarouselSlides(
   topicPrompt: string,
-  apiKey: string
+  apiKey: string,
+  model?: string
 ): Promise<z.infer<typeof MultiSlideSchema> | null> {
-  const model = startModelClient(apiKey);
+  const modelClient = startModelClient(apiKey, model);
 
-  const result = await model.invoke([
+  const result = await modelClient.invoke([
     new SystemMessage(
       `
       Create a Carousel of slides following these rules
@@ -69,12 +70,8 @@ export async function generateCarouselSlides(
   }
 }
 
-function startModelClient(api_key: string) {
-  return new ChatOpenAI({
-    openAIApiKey: api_key,
-    modelName: "gpt-4o-mini",
-    temperature: 0,
-  }).bind({
+function startModelClient(api_key: string, model?: string) {
+  return createOpenRouterClient(api_key, model).bind({
     // TODO Migrate to Tool and force to call the function with tool choice
     functions: [carouselFunctionSchema],
     function_call: { name: "carouselCreator" },

@@ -5,14 +5,14 @@ import { generateCarouselSlides } from "@/lib/langchain";
 import { headers } from "next/headers";
 
 export async function generateCarouselSlidesAction(userPrompt: string) {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.OPENROUTER_API_KEY) {
     return null;
   }
 
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {  
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     const ip = headers().get("x-real-ip") ?? "local";
     const rl = await messageRateLimit.limit(ip);
-    
+
     if (!rl.success) {
       // TODO: Handle returning errors
       return null;
@@ -21,7 +21,8 @@ export async function generateCarouselSlidesAction(userPrompt: string) {
 
   const generatedSlides = await generateCarouselSlides(
     userPrompt,
-    process.env.OPENAI_API_KEY
+    process.env.OPENROUTER_API_KEY,
+    process.env.OPENROUTER_MODEL
   );
   return generatedSlides;
 }
