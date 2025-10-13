@@ -17,14 +17,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Sparkles } from "lucide-react";
-import { generateCarouselSlides } from "@/lib/langchain";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { useState } from "react";
 import { LoadingSpinner } from "@/components/loading-spinner";
-import { useKeys } from "@/lib/hooks/use-keys";
 import { useKeysContext } from "@/lib/providers/keys-context";
 import { useStatusContext } from "@/lib/providers/editor-status-context";
 import { generateCarouselSlidesAction } from "@/app/actions";
+import {
+  DEFAULT_OPENROUTER_MODEL,
+  OPENROUTER_PROVIDER_NAME,
+} from "@/lib/constants/openrouter";
 
 const FormSchema = z.object({
   prompt: z.string().min(2, {
@@ -103,6 +105,9 @@ export function AIInputForm() {
                   </Button>
                 </div>
               </FormControl>
+              <FormDescription className="text-xs text-muted-foreground">
+                {OPENROUTER_PROVIDER_NAME} • {DEFAULT_OPENROUTER_MODEL}
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

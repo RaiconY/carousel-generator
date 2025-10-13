@@ -1,9 +1,13 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
+import { DEFAULT_OPENROUTER_MODEL } from "@/lib/constants/openrouter";
 
-export function createOpenRouterClient(apiKey: string, model?: string) {
+export function createOpenRouterClient(
+  apiKey: string,
+  model: string = DEFAULT_OPENROUTER_MODEL
+) {
   return new ChatOpenAI({
     openAIApiKey: apiKey,
-    modelName: model || "anthropic/claude-3.5-sonnet",
+    modelName: model,
     temperature: 0,
     configuration: {
       baseURL: "https://openrouter.ai/api/v1",
