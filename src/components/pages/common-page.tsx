@@ -61,7 +61,7 @@ export function CommonPage({
     [offsetHeights]
     // TODO ADD dependencies
   );
-  const remainingHeight = elementsHeight
+  const remainingHeight = elementsHeight && footerDimensions.height
     ? size.height - FRAME_PADDING * 2 - footerDimensions.height - elementsHeight
     : 0;
 

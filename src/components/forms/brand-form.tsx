@@ -21,7 +21,7 @@ export function BrandForm({}: {}) {
     <Form {...form}>
       <form className="space-y-6 w-full">
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="config.brand.name"
           render={({ field }) => (
             <FormItem>
@@ -34,7 +34,7 @@ export function BrandForm({}: {}) {
           )}
         />
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="config.brand.handle"
           render={({ field }) => (
             <FormItem>

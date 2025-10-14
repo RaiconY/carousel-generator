@@ -27,12 +27,12 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
     defaultValues,
     DocumentSchema
   );
-  const documentForm: DocumentFormReturn = useForm<
+  const documentForm = useForm<
     z.infer<typeof DocumentSchema>
   >({
     resolver: zodResolver(DocumentSchema),
     defaultValues: getSavedData(),
-  });
+  }) as unknown as DocumentFormReturn;
   usePersistFormValues({
     localStorageKey: FORM_DATA_KEY,
     values: documentForm.getValues(),

@@ -14,7 +14,6 @@ import { getParent, getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 import { CSSProperties } from "react";
-import { set } from "zod";
 
 export function TextAreaFormField({
   form,
@@ -37,7 +36,7 @@ export function TextAreaFormField({
 
   return (
     <FormField
-      control={form.control}
+      control={form.control as any}
       name={fieldName}
       render={({ field }) => (
         <FormItem className={"space-y-0"}>

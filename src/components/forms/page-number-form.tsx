@@ -20,7 +20,7 @@ export function PageNumberForm({}: {}) {
     <Form {...form}>
       <form className="space-y-6 w-full">
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="config.pageNumber.showNumbers"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">

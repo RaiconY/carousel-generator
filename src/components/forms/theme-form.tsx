@@ -23,7 +23,7 @@ function PalletteSelector({ form }: { form: DocumentFormReturn }) {
 
   return (
     <FormField
-      control={control}
+      control={control as any}
       name="config.theme.pallette"
       render={({ field }) => (
         <FormItem className="space-y-3">
@@ -67,7 +67,7 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
   return (
     <>
       <FormField
-        control={form.control}
+        control={form.control as any}
         name="config.theme.primary"
         render={({ field }) => (
           <FormItem>
@@ -80,7 +80,7 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
         )}
       />
       <FormField
-        control={form.control}
+        control={form.control as any}
         name="config.theme.secondary"
         render={({ field }) => (
           <FormItem>
@@ -93,7 +93,7 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
         )}
       />
       <FormField
-        control={form.control}
+        control={form.control as any}
         name="config.theme.background"
         render={({ field }) => (
           <FormItem>
@@ -118,7 +118,7 @@ export function ThemeForm({}: {}) {
     <Form {...form}>
       <form className="space-y-6 w-full py-4">
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="config.theme.isCustom"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">

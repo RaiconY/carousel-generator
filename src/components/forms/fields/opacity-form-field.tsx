@@ -34,7 +34,7 @@ export function OpacityFormField({
 
   return (
     <FormField
-      control={form.control}
+      control={form.control as any}
       name={fieldName}
       render={({ field: { onChange } }) => {
         return (

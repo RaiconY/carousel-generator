@@ -40,7 +40,7 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
     <div className="flex flex-col gap-3">
       <TypographyFieldName>{name}</TypographyFieldName>
       <FormField
-        control={form.control}
+        control={form.control as any}
         name={fieldName}
         render={({ field }) => (
           <FormItem>

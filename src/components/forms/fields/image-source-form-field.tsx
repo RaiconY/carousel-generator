@@ -50,7 +50,7 @@ export function ImageSourceFormField({
       </TabsList>
       <TabsContent value={ImageInputType.Url}>
         <FormField
-          control={form.control}
+          control={form.control as any}
           name={`${fieldName}.src`}
           render={({ field }) => {
             return (
@@ -71,7 +71,7 @@ export function ImageSourceFormField({
       </TabsContent>
       <TabsContent value={ImageInputType.Upload}>
         <FormField
-          control={form.control}
+          control={form.control as any}
           name={`${fieldName}.src`}
           render={({ field }) => {
             return (

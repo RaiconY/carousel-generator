@@ -20,7 +20,7 @@ export function FilenameForm({ className = "" }: { className?: string }) {
     <Form {...form}>
       <form className="">
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="filename"
           render={({ field }) => (
             <FormItem>
