@@ -45,17 +45,25 @@ export default function SlideMenubar({
   const handleDownloadPng = async () => {
     setIsExporting(true);
     try {
+      console.log("Attempting to export slide", currentPage);
+
       // Find the slide element by its carousel item ID
       const carouselItem = document.getElementById(`carousel-item-${currentPage}`);
       if (!carouselItem) {
+        console.error("Carousel item not found:", `carousel-item-${currentPage}`);
         throw new Error("Slide element not found");
       }
+
+      console.log("Found carousel item:", carouselItem);
 
       // Find the actual slide content (PageBase element)
       const slideElement = carouselItem.querySelector('[id^="page-base-"]') as HTMLElement;
       if (!slideElement) {
+        console.error("Slide content not found in carousel item");
         throw new Error("Slide content not found");
       }
+
+      console.log("Found slide element:", slideElement);
 
       await exportSlideToPng(currentPage, slideElement);
       toast({
@@ -64,9 +72,10 @@ export default function SlideMenubar({
       });
     } catch (error) {
       console.error("Export failed:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       toast({
         title: "Error",
-        description: "Failed to export slide",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -77,17 +86,25 @@ export default function SlideMenubar({
   const handleCopyPng = async () => {
     setIsExporting(true);
     try {
+      console.log("Attempting to copy slide", currentPage);
+
       // Find the slide element by its carousel item ID
       const carouselItem = document.getElementById(`carousel-item-${currentPage}`);
       if (!carouselItem) {
+        console.error("Carousel item not found:", `carousel-item-${currentPage}`);
         throw new Error("Slide element not found");
       }
+
+      console.log("Found carousel item:", carouselItem);
 
       // Find the actual slide content (PageBase element)
       const slideElement = carouselItem.querySelector('[id^="page-base-"]') as HTMLElement;
       if (!slideElement) {
+        console.error("Slide content not found in carousel item");
         throw new Error("Slide content not found");
       }
+
+      console.log("Found slide element:", slideElement);
 
       await copySlideToPng(slideElement);
       toast({
@@ -96,9 +113,10 @@ export default function SlideMenubar({
       });
     } catch (error) {
       console.error("Copy failed:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       toast({
         title: "Error",
-        description: "Failed to copy slide. Clipboard API may not be supported in your browser.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
