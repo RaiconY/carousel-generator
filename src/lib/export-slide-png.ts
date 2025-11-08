@@ -39,7 +39,9 @@ export async function exportSlideToPng(
       throw new Error("Slide element not found");
     }
 
-    console.log("Starting PNG export for slide", slideIndex, slideElement);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Starting PNG export for slide", slideIndex, slideElement);
+    }
 
     // Generate PNG data URL
     const dataUrl = await toPng(slideElement, {
@@ -49,7 +51,9 @@ export async function exportSlideToPng(
       cacheBust: true,
     });
 
-    console.log("PNG generated successfully");
+    if (process.env.NODE_ENV !== "production") {
+      console.log("PNG generated successfully");
+    }
 
     // Create download link
     const link = document.createElement("a");
@@ -57,7 +61,9 @@ export async function exportSlideToPng(
     link.href = dataUrl;
     link.click();
   } catch (error) {
-    console.error("Error exporting slide to PNG:", error);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Error exporting slide to PNG:", error);
+    }
     throw new Error(
       `Failed to export slide: ${error instanceof Error ? error.message : "Unknown error"}`
     );
@@ -72,7 +78,9 @@ export async function copySlideToPng(
       throw new Error("Slide element not found");
     }
 
-    console.log("Starting PNG copy to clipboard", slideElement);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Starting PNG copy to clipboard", slideElement);
+    }
 
     // Check if Clipboard API is supported
     if (!navigator.clipboard || !window.ClipboardItem) {
@@ -87,13 +95,17 @@ export async function copySlideToPng(
       cacheBust: true,
     });
 
-    console.log("PNG generated successfully");
+    if (process.env.NODE_ENV !== "production") {
+      console.log("PNG generated successfully");
+    }
 
     // Convert data URL to blob
     const response = await fetch(dataUrl);
     const blob = await response.blob();
 
-    console.log("Copying to clipboard", blob);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Copying to clipboard", blob);
+    }
 
     // Copy to clipboard using Clipboard API
     await navigator.clipboard.write([
@@ -102,9 +114,13 @@ export async function copySlideToPng(
       }),
     ]);
 
-    console.log("Copied to clipboard successfully");
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Copied to clipboard successfully");
+    }
   } catch (error) {
-    console.error("Error copying slide to clipboard:", error);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Error copying slide to clipboard:", error);
+    }
     throw new Error(
       `Failed to copy slide: ${error instanceof Error ? error.message : "Unknown error"}`
     );

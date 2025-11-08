@@ -151,13 +151,17 @@ export function useComponentPrinter() {
     print: async (printIframe) => {
       const contentDocument = printIframe.contentDocument;
       if (!contentDocument) {
-        console.error("iFrame does not have a document content");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("iFrame does not have a document content");
+        }
         return;
       }
 
       const html = contentDocument.getElementById("element-to-download-as-pdf");
       if (!html) {
-        console.error("Couldn't find element to convert to PDF");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Couldn't find element to convert to PDF");
+        }
         return;
       }
 
@@ -179,10 +183,14 @@ export function useComponentPrinter() {
 
       // TODO Create buttons to download as png / svg / etc from 'html-to-image'
       const canvas = await toCanvas(html, options.htmlToImage).catch((err) => {
-        console.error(err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error(err);
+        }
       });
       if (!canvas) {
-        console.error("Failed to create canvas");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to create canvas");
+        }
         return;
       }
       // DEBUG:

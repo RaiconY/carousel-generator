@@ -63,9 +63,11 @@ export async function generateCarouselSlides(
   if (unstyledDocumentParseResult.success) {
     return MultiSlideSchema.parse(unstyledDocumentParseResult.data.slides);
   } else {
-    console.log("Error in carousel generation schema");
-    console.error(unstyledDocumentParseResult.error);
-    console.log(jsonParsed);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Error in carousel generation schema");
+      console.error(unstyledDocumentParseResult.error);
+      console.log(jsonParsed);
+    }
     return null;
   }
 }
