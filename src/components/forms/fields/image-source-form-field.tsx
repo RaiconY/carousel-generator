@@ -104,7 +104,9 @@ export function ImageSourceFormField({
                         );
                         field.onChange(dataUrl ? dataUrl : "");
                       } else {
-                        console.error("No valid image file selected.");
+                        if (process.env.NODE_ENV !== "production") {
+                          console.error("No valid image file selected.");
+                        }
                       }
                     }}
                   />

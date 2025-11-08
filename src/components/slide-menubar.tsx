@@ -45,25 +45,35 @@ export default function SlideMenubar({
   const handleDownloadPng = async () => {
     setIsExporting(true);
     try {
-      console.log("Attempting to export slide", currentPage);
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Attempting to export slide", currentPage);
+      }
 
       // Find the slide element by its carousel item ID
       const carouselItem = document.getElementById(`carousel-item-${currentPage}`);
       if (!carouselItem) {
-        console.error("Carousel item not found:", `carousel-item-${currentPage}`);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Carousel item not found:", `carousel-item-${currentPage}`);
+        }
         throw new Error("Slide element not found");
       }
 
-      console.log("Found carousel item:", carouselItem);
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Found carousel item:", carouselItem);
+      }
 
       // Find the actual slide content (PageBase element)
       const slideElement = carouselItem.querySelector('[id^="page-base-"]') as HTMLElement;
       if (!slideElement) {
-        console.error("Slide content not found in carousel item");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Slide content not found in carousel item");
+        }
         throw new Error("Slide content not found");
       }
 
-      console.log("Found slide element:", slideElement);
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Found slide element:", slideElement);
+      }
 
       await exportSlideToPng(currentPage, slideElement);
       toast({
@@ -71,7 +81,9 @@ export default function SlideMenubar({
         description: `Slide ${currentPage + 1} exported successfully`,
       });
     } catch (error) {
-      console.error("Export failed:", error);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Export failed:", error);
+      }
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       toast({
         title: "Error",
@@ -86,25 +98,35 @@ export default function SlideMenubar({
   const handleCopyPng = async () => {
     setIsExporting(true);
     try {
-      console.log("Attempting to copy slide", currentPage);
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Attempting to copy slide", currentPage);
+      }
 
       // Find the slide element by its carousel item ID
       const carouselItem = document.getElementById(`carousel-item-${currentPage}`);
       if (!carouselItem) {
-        console.error("Carousel item not found:", `carousel-item-${currentPage}`);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Carousel item not found:", `carousel-item-${currentPage}`);
+        }
         throw new Error("Slide element not found");
       }
 
-      console.log("Found carousel item:", carouselItem);
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Found carousel item:", carouselItem);
+      }
 
       // Find the actual slide content (PageBase element)
       const slideElement = carouselItem.querySelector('[id^="page-base-"]') as HTMLElement;
       if (!slideElement) {
-        console.error("Slide content not found in carousel item");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Slide content not found in carousel item");
+        }
         throw new Error("Slide content not found");
       }
 
-      console.log("Found slide element:", slideElement);
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Found slide element:", slideElement);
+      }
 
       await copySlideToPng(slideElement);
       toast({
@@ -112,7 +134,9 @@ export default function SlideMenubar({
         description: "Slide copied to clipboard",
       });
     } catch (error) {
-      console.error("Copy failed:", error);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Copy failed:", error);
+      }
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       toast({
         title: "Error",
@@ -145,16 +169,17 @@ export default function SlideMenubar({
       </Button>
       <Button
         onClick={() => {
-          console.log({
-            currentPage,
-            pageValue: currentSlidesValues[currentPage],
-          });
+          if (process.env.NODE_ENV !== "production") {
+            console.log({
+              currentPage,
+              pageValue: currentSlidesValues[currentPage],
+            });
+          }
           const insertPosition = currentPage;
           const values = JSON.parse(
             JSON.stringify(currentSlidesValues[insertPosition])
           );
           insert(insertPosition, values);
-          // TODO A clone sets focus to an input and that resets current page back to `inserposition`
           setCurrentPage(insertPosition + 1);
         }}
         disabled={currentPage == 0 && numPages == 0}
@@ -173,7 +198,9 @@ export default function SlideMenubar({
           } else if (currentPage == 0 && numPages > 0) {
             setCurrentPage(0);
           } else if (currentPage < 0 || currentPage >= numPages) {
-            console.error("Current page number not valid: ", currentPage);
+            if (process.env.NODE_ENV !== "production") {
+              console.error("Current page number not valid: ", currentPage);
+            }
           }
         }}
         disabled={currentPage == 0 && numPages == 0}

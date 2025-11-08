@@ -24,7 +24,6 @@ export function JsonImporter({
   const [open, setOpen] = useState(false);
 
   const { handleFileSubmission } = useFieldsFileImporter(fields);
-  // TODO: Make this component more generic by splitting dependencies of config and slides
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

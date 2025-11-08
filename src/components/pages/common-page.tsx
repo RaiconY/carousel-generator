@@ -60,7 +60,6 @@ export function CommonPage({
       );
     },
     [offsetHeights]
-    // TODO ADD dependencies
   );
   const remainingHeight = elementsHeight && footerDimensions.height
     ? size.height - FRAME_PADDING * 2 - footerDimensions.height - elementsHeight
@@ -135,7 +134,6 @@ export function CommonPage({
               </ElementMenubarWrapper>
             ) : null;
           })}
-          {/* // TODO Replace 50 by the element size of element to introduce or minimum of all elements */}
           {remainingHeight && remainingHeight >= 50 ? (
             <AddElement
               fieldName={(fieldName + ".elements") as ElementArrayFieldPath}

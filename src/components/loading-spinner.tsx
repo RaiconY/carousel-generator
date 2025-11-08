@@ -1,5 +1,5 @@
-import { Loader2Icon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 export function LoadingSpinner() {
-  return <Loader2Icon className="w-4 h-4 animate-spin" />;
+  return <Loader2 className="w-4 h-4 animate-spin" />;
 }

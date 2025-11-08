@@ -32,7 +32,6 @@ export function ContentImage({
   const pageNumber = getSlideNumber(fieldName);
   const source = image.source.src || "https://placehold.co/400x200";
 
-  // TODO: Convert to Toggle to make it accessible. Control with selection
 
   return (
     <div
@@ -44,10 +43,8 @@ export function ContentImage({
         className
       )}
     >
-      {/* // TODO: Extract to component */}
       <img
         alt="slide image"
-        src={source} // TODO: Extract cover/contain into a setting for images
         className={cn(
           // shadow-md or any box shadow not supported by html2canvas
           "rounded-md overflow-hidden",

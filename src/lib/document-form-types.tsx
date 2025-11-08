@@ -31,7 +31,6 @@ export type SlidesFieldArrayReturn = UseFieldArrayReturn<
 
 export type ElementsFieldArrayReturn = UseFieldArrayReturn<
   z.infer<typeof CommonSlideSchema>,
-  `elements` // TODO: This shouldn't be 0, it should be generic
 >;
 
 export type SlideFieldPath = `slides.${number}`;

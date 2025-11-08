@@ -25,12 +25,16 @@ export function useRetrieveFormValues<T, DocumentSchema>(
         if (safeParseResult.success) {
           return safeParseResult.data as T;
         } else {
-          console.error(safeParseResult.error);
+          if (process.env.NODE_ENV !== "production") {
+            console.error(safeParseResult.error);
+          }
           localStorage.clear();
           return defaultValues;
         }
       } catch (err) {
-        console.log(err);
+        if (process.env.NODE_ENV !== "production") {
+          console.log(err);
+        }
       }
     }
     return defaultValues;

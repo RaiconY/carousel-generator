@@ -20,7 +20,9 @@ export function useFieldsFileImporter(field: "config" | "slides") {
     setFileReaderIsConfigured(true);
     fileReader.onload = function (e: ProgressEvent) {
       if (!e.target) {
-        console.error("Failed to load file input");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to load file input");
+        }
         return;
       }
 
@@ -36,11 +38,15 @@ export function useFieldsFileImporter(field: "config" | "slides") {
         const parsedValues = MultiSlideSchema.parse(result);
 
         if (parsedValues) {
-          console.log({ parsedValues });
+          if (process.env.NODE_ENV !== "production") {
+            console.log({ parsedValues });
+          }
           setValue(field, parsedValues);
         }
       } else {
-        console.error("field provided is incorrect");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("field provided is incorrect");
+        }
       }
     };
   }

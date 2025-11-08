@@ -58,7 +58,6 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
             )}
           </div>
         </Button>
-        {/* // TODO: Re-enable your own keys system  */}
         {/* <BringYourKeysDialog
           triggerButton={
             <Button variant="ghost" size={"icon"}>

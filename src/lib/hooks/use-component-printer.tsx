@@ -8,7 +8,6 @@ import { toCanvas } from "html-to-image";
 import { Options as HtmlToImageOptions } from "html-to-image/lib/types";
 import { jsPDF, jsPDFOptions } from "jspdf";
 
-// TODO: Create a reusable component and package with this code
 
 type HtmlToPdfOptions = {
   margin: [number, number, number, number];
@@ -107,7 +106,6 @@ export function useComponentPrinter() {
   const { watch }: DocumentFormReturn = useFormContext();
 
   const [isPrinting, setIsPrinting] = React.useState(false);
-  // TODO: Show animation on loading
   const componentRef = React.useRef(null);
 
   // Packages and references
@@ -151,13 +149,17 @@ export function useComponentPrinter() {
     print: async (printIframe) => {
       const contentDocument = printIframe.contentDocument;
       if (!contentDocument) {
-        console.error("iFrame does not have a document content");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("iFrame does not have a document content");
+        }
         return;
       }
 
       const html = contentDocument.getElementById("element-to-download-as-pdf");
       if (!html) {
-        console.error("Couldn't find element to convert to PDF");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Couldn't find element to convert to PDF");
+        }
         return;
       }
 
@@ -177,12 +179,15 @@ export function useComponentPrinter() {
         jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
       };
 
-      // TODO Create buttons to download as png / svg / etc from 'html-to-image'
       const canvas = await toCanvas(html, options.htmlToImage).catch((err) => {
-        console.error(err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error(err);
+        }
       });
       if (!canvas) {
-        console.error("Failed to create canvas");
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to create canvas");
+        }
         return;
       }
       // DEBUG:
@@ -210,11 +215,9 @@ function proxyImgSources(html: HTMLElement) {
     (image) => !image.src.startsWith("/") && !image.src.startsWith("data:")
   );
 
-  // TODO: Make a single request with the list of images
   externalImages.forEach((image) => {
     const apiRequestURL = new URL(`${url}/api/proxy`);
     apiRequestURL.searchParams.set("url", image.src);
-    // TODO: Consider using the cache of fetch
     image.src = apiRequestURL.toString();
   });
 }
