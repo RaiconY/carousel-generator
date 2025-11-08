@@ -105,7 +105,6 @@ export function TypographyBlockquote({
   );
 }
 
-// TODO: Add table styles
 
 export function TypographyList({
   children,

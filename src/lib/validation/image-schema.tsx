@@ -7,7 +7,6 @@ const ImageDataUrlSchema = z
     message: "Invalid data URL format. It should start with 'data:image/'.",
   });
 
-// TODO: Make more granular defaults in all schemas
 
 export const ObjectFitType = z.enum(["Cover", "Contain"]);
 export type ObjectFitType = z.infer<typeof ObjectFitType>;

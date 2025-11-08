@@ -13,7 +13,6 @@ export function PageNumber({
   number: number;
   className?: string;
 }) {
-  // TODO: Use the view to optionally add a circle around it
   return (
     <div className={`flex flex-row gap-3 items-center ${cn(className)}`}>
       <p

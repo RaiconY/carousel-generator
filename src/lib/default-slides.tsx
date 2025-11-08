@@ -41,7 +41,6 @@ export function getDefaultSlideOfType(slideType: SlideType) {
     return { ...OUTRO };
   } else {
     return { ...COMMON_PAGE };
-    // TODO This method should be reused for elements
     throw Error(`Unknown slide type [${slideType}]`);
   }
 }

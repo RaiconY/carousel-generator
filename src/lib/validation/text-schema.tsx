@@ -25,7 +25,6 @@ export const UnstyledTitleSchema = z.object({
     .default(""),
 });
 
-// TODO use zod merge to add style
 export const TitleSchema = UnstyledTitleSchema.merge(
   z.object({
     type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),

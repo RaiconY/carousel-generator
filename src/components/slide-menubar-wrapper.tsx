@@ -10,7 +10,6 @@ import SlideMenubar from "@/components/slide-menubar";
 
 export default function SlideMenubarWrapper({
   // slidesFieldArray,
-  fieldName, //TODO Maybe change with number or expose onclciks
   slidesFieldArray,
   children,
   className = "",

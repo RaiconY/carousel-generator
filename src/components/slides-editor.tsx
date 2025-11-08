@@ -47,7 +47,6 @@ export function SlidesEditor({}: SlidesEditorProps) {
   return (
     <div
       className="flex flex-col w-full items-center justify-start bg-muted/20 flex-1 h-full"
-      // TODO: When background gets clicked element gets unselected
       onClick={(event) => {
         // Only clear selection if this element started the event
         setCurrentSelection("", event);

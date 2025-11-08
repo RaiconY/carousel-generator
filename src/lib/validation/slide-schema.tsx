@@ -35,7 +35,6 @@ export const UnstyledSlideSchema = z.object({
   elements: z.array(UnstyledElementSchema).max(3),
 });
 
-// TODO: Convert into: elements prop with an array of discriminated union of types
 export const CommonSlideSchema = z.object({
   elements: z.array(ElementSchema).default([]),
   backgroundImage: ImageSchema.default(DEFAULT_BACKGROUND_IMAGE_INPUT),

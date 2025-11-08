@@ -94,7 +94,6 @@ export function Document({
               size={SIZE}
               className="px-2"
               handleAddPage={(pageType: SlideType) => {
-                // TODO: Should add with index at different locations and set as current page the index
                 prepend(getDefaultSlideOfType(pageType));
               }}
               isSideButton={newPageAsSideButton}
@@ -139,7 +138,6 @@ export function Document({
               size={SIZE}
               className="px-2"
               handleAddPage={(pageType: SlideType) => {
-                // TODO: Should add with index at different locations and set as current page the index
                 append(getDefaultSlideOfType(pageType));
               }}
               isSideButton={newPageAsSideButton}

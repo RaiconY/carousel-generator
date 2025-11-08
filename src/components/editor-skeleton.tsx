@@ -35,7 +35,6 @@ function SlideSkeleton({ className }: { className?: string }) {
 }
 
 export function DocumentSkeleton() {
-  // TODO: Fix layout spacing of skeleton. Ideally should look like carousel
   return (
     <div className="flex h-full w-full flex-row gap-2 mt-12 px-28">
       <SlideSkeleton />

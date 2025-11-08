@@ -68,7 +68,6 @@ function ElementMenubar({
           // });
           const insertPosition = currentElementNumber;
           const values = JSON.parse(JSON.stringify(currentElementValue));
-          insert(insertPosition, values); // // TODO A clone sets focus to an input and that resets current page back to `inserposition`
           // setCurrentPage(insertPosition + 1);
         }}
         disabled={currentElementNumber == 0 && numElements == 0}
@@ -122,7 +121,6 @@ const ElementMenubarWrapper = React.forwardRef<
 >(function ElementMenubarWrapper(
   {
     // slidesFieldArray,
-    fieldName, //TODO Maybe change with number or expose onclciks
     children,
     className = "",
   },
@@ -140,7 +138,6 @@ const ElementMenubarWrapper = React.forwardRef<
         )}
       >
         <ElementMenubar
-          fieldName={fieldName} //TODO Maybe change with number or expose onclciks
           className={className}
         />
       </div>

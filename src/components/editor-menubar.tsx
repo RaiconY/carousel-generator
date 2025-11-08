@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { JsonExporter } from "./json-exporter";
 import { JsonImporter } from "./json-importer";
 import { FilenameForm } from "./forms/filename-form";
+import { Button } from "@/components/ui/button";
 import {
   Menubar,
   MenubarContent,
@@ -21,6 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import FileInputForm from "./forms/file-input-form";
 import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
@@ -35,12 +38,12 @@ export function EditorMenubar({}: {}) {
   const { handleFileSubmission: handleConfigFileSubmission } =
     useFieldsFileImporter("config");
   const [isContentDialogOpen, setIsContentDialogOpen] = useState(false);
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 
   const { handleFileSubmission: handleContentFileSubmission } =
     useFieldsFileImporter("slides");
 
   return (
-    // TODO: Add Here download and help
     <div className="flex items-center flex-row gap-2">
       <Menubar>
         <MenubarMenu>
@@ -114,15 +117,44 @@ export function EditorMenubar({}: {}) {
 
             <MenubarSeparator />
 
-            <MenubarItem
-              onClick={() => {
-                reset(defaultValues);
-                setCurrentPage(0);
-              }}
+            <Dialog
+              open={isResetDialogOpen}
+              onOpenChange={setIsResetDialogOpen}
             >
-              {/* TODO: This should have a confirmation alert dialog */}
-              Reset to defaults
-            </MenubarItem>
+              <DialogTrigger asChild>
+                <MenubarItem onSelect={(e) => e.preventDefault()}>
+                  Reset to defaults
+                </MenubarItem>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Are you absolutely sure?</DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone. This will reset all your
+                    carousel settings and content to default values. All your
+                    current work will be lost.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="gap-2 sm:gap-0">
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsResetDialogOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={() => {
+                      reset(defaultValues);
+                      setCurrentPage(0);
+                      setIsResetDialogOpen(false);
+                    }}
+                  >
+                    Reset
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
             {/* <MenubarSeparator /> */}
             {/* <MenubarItem>Print</MenubarItem> */}
           </MenubarContent>

@@ -8,7 +8,6 @@ import { toCanvas } from "html-to-image";
 import { Options as HtmlToImageOptions } from "html-to-image/lib/types";
 import { jsPDF, jsPDFOptions } from "jspdf";
 
-// TODO: Create a reusable component and package with this code
 
 type HtmlToPdfOptions = {
   margin: [number, number, number, number];
@@ -107,7 +106,6 @@ export function useComponentPrinter() {
   const { watch }: DocumentFormReturn = useFormContext();
 
   const [isPrinting, setIsPrinting] = React.useState(false);
-  // TODO: Show animation on loading
   const componentRef = React.useRef(null);
 
   // Packages and references
@@ -181,7 +179,6 @@ export function useComponentPrinter() {
         jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
       };
 
-      // TODO Create buttons to download as png / svg / etc from 'html-to-image'
       const canvas = await toCanvas(html, options.htmlToImage).catch((err) => {
         if (process.env.NODE_ENV !== "production") {
           console.error(err);
@@ -218,11 +215,9 @@ function proxyImgSources(html: HTMLElement) {
     (image) => !image.src.startsWith("/") && !image.src.startsWith("data:")
   );
 
-  // TODO: Make a single request with the list of images
   externalImages.forEach((image) => {
     const apiRequestURL = new URL(`${url}/api/proxy`);
     apiRequestURL.searchParams.set("url", image.src);
-    // TODO: Consider using the cache of fetch
     image.src = apiRequestURL.toString();
   });
 }

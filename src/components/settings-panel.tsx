@@ -115,7 +115,6 @@ export function SidebarPanel({ className }: { className?: string }) {
 
 function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   const { setCurrentSelection } = useSelectionContext();
-  //  TODO Convert this comp into a forwardref like its child
   return (
     <VerticalTabsTrigger
       value={tabInfo.value}
@@ -131,7 +130,6 @@ function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
 
 function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   const { setCurrentSelection } = useSelectionContext();
-  //  TODO Convert this comp into a forwardref like its child
   return (
     <TabsTrigger
       value={tabInfo.value}
@@ -173,10 +171,8 @@ export function SidebarTabsPanel() {
         </ScrollArea>
         <ScrollArea className="h-full w-full">
           <div className="p-2 flex flex-col items-stretch w-full h-full">
-            {/* //TODO: Share this area with stylemenu */}
             {currentSelection ? (
               <StyleMenu form={form} className={"m-4"} />
-            ) : // TODO: Create consistent styles between tabs and StyleMenu
             null}
             <VerticalTabsContent
               value={ALL_FORMS.design.value}
@@ -231,7 +227,6 @@ export function SidebarTabsPanel() {
 export function DrawerFormsPanel({ className }: { className: string }) {
   const { currentSelection } = useSelectionContext();
   const [tab, setTab] = useState(ALL_FORMS.design.value);
-  // TODO: Lift state to not loose it when drawer gets closed ?
 
   return (
     <Tabs
@@ -255,7 +250,6 @@ export function DrawerFormsPanel({ className }: { className: string }) {
           </TabsList>
         </ScrollArea>
         <div className="p-2 w-[320px] m-auto">
-          {/* // TODO Should be in a ScrollArea but it does not scroll */}
           <TabsContent
             value={ALL_FORMS.design.value}
             className="mt-0 border-0 p-0 m-4 "

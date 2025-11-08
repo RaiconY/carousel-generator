@@ -63,7 +63,6 @@ function PalletteSelector({ form }: { form: DocumentFormReturn }) {
 }
 
 function CustomColors({ form }: { form: DocumentFormReturn }) {
-  // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
   return (
     <>
       <FormField
@@ -114,7 +113,6 @@ export function ThemeForm({}: {}) {
   const { watch } = form;
   const isCustom = watch("config.theme.isCustom");
   return (
-    // TODO: check on custom color to enable/disable pallette custom colors
     <Form {...form}>
       <form className="space-y-6 w-full py-4">
         <FormField

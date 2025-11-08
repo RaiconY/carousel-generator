@@ -55,7 +55,6 @@ export function TextAreaFormField({
                 event.stopPropagation();
               }}
               value={form.getValues(fieldName)}
-              // TODO: Create currentHover
               // Link with onMouseEnter and onMouseLeave
             />
           </FormControl>
