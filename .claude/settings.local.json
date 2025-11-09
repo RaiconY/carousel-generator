@@ -4,7 +4,8 @@
       "Bash(npx tsc:*)",
       "Bash(exit 0)",
       "Bash(node_modules.bintsc --noEmit)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
