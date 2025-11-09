@@ -5,7 +5,11 @@
       "Bash(exit 0)",
       "Bash(node_modules.bintsc --noEmit)",
       "Bash(npm run lint)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(xargs -I {} taskkill //PID {} //F)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []

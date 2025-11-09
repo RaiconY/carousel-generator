@@ -16,7 +16,7 @@ import { usePagerContext } from "@/lib/providers/pager-context";
 import { Separator } from "@/components/ui/separator";
 import { FontsForm } from "@/components/forms/fonts-form";
 import { PageNumberForm } from "./forms/page-number-form";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Briefcase,
   Brush,
@@ -74,13 +74,24 @@ const ALL_FORMS: Record<string, TabInfo> = {
   },
 };
 
-export function SidebarPanel({ className }: { className?: string }) {
+export function SidebarPanel({
+  className,
+  desktopHidden = false,
+}: {
+  className?: string;
+  desktopHidden?: boolean;
+}) {
   const form: DocumentFormReturn = useFormContext();
   const { currentSelection } = useSelectionContext();
 
   return (
-    <div className={cn("h-full flex flex-1", className)}>
-      <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
+    <div className={cn("h-full flex flex-1 min-h-0", className)}>
+      <aside
+        className={cn(
+          "z-30 hidden h-full w-full shrink-0 border-r bg-background md:sticky md:top-0 md:h-full md:max-h-full md:min-h-0 md:overflow-hidden",
+          desktopHidden ? "md:hidden" : "md:block"
+        )}
+      >
         <SidebarTabsPanel />
       </aside>
       <div className="block md:hidden h-0">
@@ -118,12 +129,12 @@ function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   return (
     <VerticalTabsTrigger
       value={tabInfo.value}
-      className="h-16 flex flex-col gap-2 items-center py-2 justify-center"
+      className="h-16 w-full flex flex-col gap-2 items-center py-2 px-1 justify-center"
       onFocus={() => setCurrentSelection("", null)}
     >
       <tabInfo.icon className="h-4 w-4" />
       <span className="sr-only ">{tabInfo.name}</span>
-      <p className="text-xs">{tabInfo.name}</p>
+      <p className="text-xs text-center leading-tight break-words">{tabInfo.name}</p>
     </VerticalTabsTrigger>
   );
 }
@@ -157,68 +168,71 @@ export function SidebarTabsPanel() {
           setTab(val);
         }
       }}
-      className="flex-1 h-full p-0"
+      className="flex-1 h-full min-h-0 p-0"
     >
-      <div className="flex flex-row h-full w-full">
-        <ScrollArea className="border-r h-full bg-muted">
-          <VerticalTabsList className="grid grid-cols-1 gap-2 w-20 rounded-none">
+      <div className="flex flex-row h-full w-full min-h-0">
+        <div className="border-r h-full min-h-0 bg-muted w-24 flex-shrink-0">
+          <ScrollArea className="h-full w-full">
+            <VerticalTabsList className="grid grid-cols-1 gap-2 w-full py-4 rounded-none items-stretch justify-items-stretch">
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.design} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.brand} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.theme} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.fonts} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.pageNumber} />
           </VerticalTabsList>
-        </ScrollArea>
-        <ScrollArea className="h-full w-full">
-          <div className="p-2 flex flex-col items-stretch w-full h-full">
-            {currentSelection ? (
-              <StyleMenu form={form} className={"m-4"} />
-            ) : null}
-            <VerticalTabsContent
-              value={ALL_FORMS.design.value}
-              className="mt-0 border-0 p-0 m-4 overflow-y-auto"
-            >
-              <h4 className="text-xl font-semibold">{ALL_FORMS.design.name}</h4>
-              <Separator className="mt-2 mb-4"></Separator>
-              <DesignTemplateSelector />
-            </VerticalTabsContent>
-          <VerticalTabsContent
-            value={ALL_FORMS.brand.value}
-            className="mt-0 border-0 p-0 m-4"
-          >
-            <h4 className="text-xl font-semibold">{ALL_FORMS.brand.name}</h4>
-            <Separator className="mt-2 mb-4"></Separator>
-            <BrandForm />
-          </VerticalTabsContent>
-          <VerticalTabsContent
-            value={ALL_FORMS.theme.value}
-            className="mt-0 border-0 p-0 m-4"
-          >
-            <h4 className="text-xl font-semibold">{ALL_FORMS.theme.name}</h4>
-            <Separator className="mt-2 mb-4"></Separator>
-            <ThemeForm />
-          </VerticalTabsContent>
-          <VerticalTabsContent
-            value={ALL_FORMS.fonts.value}
-            className="mt-0 border-0 p-0 m-4"
-          >
-            <h4 className="text-xl font-semibold">{ALL_FORMS.fonts.name}</h4>
-            <Separator className="mt-2 mb-4"></Separator>
-            <FontsForm />
-          </VerticalTabsContent>
-          <VerticalTabsContent
-            value={ALL_FORMS.pageNumber.value}
-            className="mt-0 border-0 p-0 m-4"
-          >
-            <h4 className="text-xl font-semibold">
-              {ALL_FORMS.pageNumber.name}
-            </h4>
-            <Separator className="mt-2 mb-4"></Separator>
-            <PageNumberForm />
-          </VerticalTabsContent>
-          </div>
-          <ScrollBar orientation="vertical" />
-        </ScrollArea>
+          </ScrollArea>
+        </div>
+        <div className="h-full w-full min-h-0 overflow-hidden">
+          <ScrollArea className="h-full w-full min-h-0">
+            <div className="p-2 flex flex-col items-stretch w-full">
+              {currentSelection ? (
+                <StyleMenu form={form} className={"m-4"} />
+              ) : null}
+              <VerticalTabsContent
+                value={ALL_FORMS.design.value}
+                className="mt-0 border-0 p-0 m-4"
+              >
+                <h4 className="text-xl font-semibold">{ALL_FORMS.design.name}</h4>
+                <Separator className="mt-2 mb-4"></Separator>
+                <DesignTemplateSelector />
+              </VerticalTabsContent>
+              <VerticalTabsContent
+                value={ALL_FORMS.brand.value}
+                className="mt-0 border-0 p-0 m-4"
+              >
+                <h4 className="text-xl font-semibold">{ALL_FORMS.brand.name}</h4>
+                <Separator className="mt-2 mb-4"></Separator>
+                <BrandForm />
+              </VerticalTabsContent>
+              <VerticalTabsContent
+                value={ALL_FORMS.theme.value}
+                className="mt-0 border-0 p-0 m-4"
+              >
+                <h4 className="text-xl font-semibold">{ALL_FORMS.theme.name}</h4>
+                <Separator className="mt-2 mb-4"></Separator>
+                <ThemeForm />
+              </VerticalTabsContent>
+              <VerticalTabsContent
+                value={ALL_FORMS.fonts.value}
+                className="mt-0 border-0 p-0 m-4"
+              >
+                <h4 className="text-xl font-semibold">{ALL_FORMS.fonts.name}</h4>
+                <Separator className="mt-2 mb-4"></Separator>
+                <FontsForm />
+              </VerticalTabsContent>
+              <VerticalTabsContent
+                value={ALL_FORMS.pageNumber.value}
+                className="mt-0 border-0 p-0 m-4"
+              >
+                <h4 className="text-xl font-semibold">
+                  {ALL_FORMS.pageNumber.name}
+                </h4>
+                <Separator className="mt-2 mb-4"></Separator>
+                <PageNumberForm />
+              </VerticalTabsContent>
+            </div>
+          </ScrollArea>
+        </div>
       </div>
     </VerticalTabs>
   );
@@ -237,10 +251,10 @@ export function DrawerFormsPanel({ className }: { className: string }) {
           setTab(val);
         }
       }}
-      className={cn("flex-1 w-full", className)}
+      className={cn("flex-1 w-full min-h-0", className)}
     >
-      <div className="flex flex-col h-full ">
-        <ScrollArea className=" border-b h-full bg-muted">
+      <div className="flex flex-col h-full min-h-0">
+        <ScrollArea className="border-b h-full min-h-0 bg-muted">
           <TabsList className="grid grid-cols-5 gap-2 h-20 rounded-none">
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.design} />
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.brand} />

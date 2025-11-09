@@ -46,12 +46,12 @@ export function DesignTemplateSelector() {
           return (
             <Card
               key={template.id}
-              className="cursor-pointer hover:ring-2 hover:ring-primary transition-all w-full"
+              className="cursor-pointer hover:ring-2 hover:ring-primary transition-all w-full max-h-[100px]"
               onClick={() => applyTemplate(template.id)}
             >
-              <CardContent className="p-3">
+              <CardContent className="p-2 flex items-center gap-2">
                 <div
-                  className="w-full h-24 rounded-md mb-2 relative overflow-hidden"
+                  className="w-16 h-16 rounded-md relative overflow-hidden flex-shrink-0"
                   style={{
                     background: bgPattern.value,
                     backgroundImage: overlay ? `url("${overlay.svg}")` : undefined,
@@ -60,13 +60,15 @@ export function DesignTemplateSelector() {
                   }}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-3xl">{template.preview}</span>
+                    <span className="text-2xl">{template.preview}</span>
                   </div>
                 </div>
-                <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
-                <p className="text-xs text-muted-foreground line-clamp-2">
-                  {template.description}
-                </p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-semibold text-sm mb-0.5 truncate">{template.name}</h4>
+                  <p className="text-xs text-muted-foreground line-clamp-2">
+                    {template.description}
+                  </p>
+                </div>
               </CardContent>
             </Card>
           );

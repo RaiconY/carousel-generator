@@ -77,7 +77,7 @@ export function Document({
         <CarouselContent
           ref={docReference}
           id="element-to-download-as-pdf"
-          className="-ml-2 md:-ml-4 flex-1"
+          className="-ml-2 md:-ml-4 flex-1 items-start"
           style={{
             paddingTop: PADDING_TOP,
             paddingBottom: PADDING_BOTTOM,

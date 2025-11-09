@@ -6,7 +6,13 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { Button } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
-import { Download, Loader2Icon, Settings } from "lucide-react";
+import {
+  Download,
+  Loader2Icon,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Settings,
+} from "lucide-react";
 import Pager from "./pager";
 import { FilenameForm } from "./forms/filename-form";
 import { BringYourKeysDialog } from "@/components/api-keys-dialog";
@@ -23,9 +29,17 @@ interface MainNavProps {
   handlePrint: () => void;
   isPrinting: boolean;
   className?: string;
+  onToggleSidebar: () => void;
+  isSidebarOpen: boolean;
 }
 
-export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
+export function MainNav({
+  handlePrint,
+  isPrinting,
+  className,
+  onToggleSidebar,
+  isSidebarOpen,
+}: MainNavProps) {
   return (
     <div
       className={cn(
@@ -33,7 +47,21 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
         className
       )}
     >
-      <div className="flex gap-4">
+      <div className="flex gap-2 md:gap-4 items-center">
+        <Button
+          variant="ghost"
+          size={"icon"}
+          className="hidden md:flex"
+          onClick={onToggleSidebar}
+          aria-pressed={isSidebarOpen}
+          aria-label={isSidebarOpen ? "Hide settings panel" : "Show settings panel"}
+        >
+          {isSidebarOpen ? (
+            <PanelLeftClose className="h-4 w-4" />
+          ) : (
+            <PanelLeftOpen className="h-4 w-4" />
+          )}
+        </Button>
         <Link href="/" className="items-center space-x-2 flex">
           <Icons.logo />
           <span className="hidden font-bold md:inline-block">

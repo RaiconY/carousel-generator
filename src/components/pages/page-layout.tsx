@@ -20,10 +20,7 @@ export function PageLayout({
 
   return (
     <div
-      className={cn(
-        "flex flex-col justify-center grow items-stretch",
-        className
-      )}
+      className={cn("flex flex-col justify-start grow items-stretch", className)}
       onClick={(event) => {
         setCurrentPage(pageNumber);
         setCurrentSelection(fieldName, event);
