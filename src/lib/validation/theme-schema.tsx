@@ -1,4 +1,8 @@
 import * as z from "zod";
+import {
+  DEFAULT_BACKGROUND_IMAGE_INPUT,
+  ImageSchema,
+} from "./image-schema";
 
 export const ColorSchema = z.object({
   // primary: z.string().min(4).max(9).regex(/^#/),
@@ -12,4 +16,5 @@ export const ThemeSchema = ColorSchema.extend({
   pallette: z.string(),
   backgroundPattern: z.string().optional(),
   overlayPattern: z.string().optional(),
+  backgroundImage: ImageSchema.default(DEFAULT_BACKGROUND_IMAGE_INPUT),
 });

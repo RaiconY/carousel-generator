@@ -3,7 +3,10 @@ import { MultiSlideSchema } from "@/lib/validation/slide-schema";
 import { SlideType } from "@/lib/validation/slide-schema";
 
 import { getDefaultSlideOfType } from "@/lib/default-slides";
-import { DEFAULT_IMAGE_INPUT } from "@/lib/validation/image-schema";
+import {
+  DEFAULT_BACKGROUND_IMAGE_INPUT,
+  DEFAULT_IMAGE_INPUT,
+} from "@/lib/validation/image-schema";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   getDefaultSlideOfType(SlideType.enum.Intro),
@@ -30,6 +33,7 @@ export const defaultValues = {
       background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       backgroundPattern: "starryNight",
       overlayPattern: "stars",
+      backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
     },
     fonts: {
       font1: "Montserrat",

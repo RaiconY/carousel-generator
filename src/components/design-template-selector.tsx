@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 
 export function DesignTemplateSelector() {
   const form: DocumentFormReturn = useFormContext();
-  const { setValue } = form;
+  const { setValue, resetField } = form;
 
   const applyTemplate = (templateId: string) => {
     const template = designTemplates.find(t => t.id === templateId);
@@ -23,6 +23,7 @@ export function DesignTemplateSelector() {
     setValue("config.theme.isCustom", true);
     setValue("config.theme.backgroundPattern", template.backgroundPattern);
     setValue("config.theme.overlayPattern", template.overlayPattern);
+    resetField("config.theme.backgroundImage");
 
     // Применяем шрифты из шаблона
     setValue("config.fonts.font1", template.font1);
@@ -89,6 +90,7 @@ export function DesignTemplateSelector() {
               onClick={() => {
                 setValue("config.theme.background", pattern.value);
                 setValue("config.theme.isCustom", true);
+                resetField("config.theme.backgroundImage");
               }}
             >
               <div

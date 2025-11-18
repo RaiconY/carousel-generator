@@ -58,21 +58,25 @@ export type ElementArrayFieldPath = `slides.${number}.elements`;
 export type ImageFieldPath =
   | `slides.${number}.elements.${number}`
   | `slides.${number}.backgroundImage`
-  | "config.brand.avatar";
+  | "config.brand.avatar"
+  | "config.theme.backgroundImage";
 
 export type ImageSourceFieldPath =
   | `slides.${number}.elements.${number}.source`
   | `slides.${number}.backgroundImage.source`
-  | "config.brand.avatar.source";
+  | "config.brand.avatar.source"
+  | "config.theme.backgroundImage.source";
 export type ImageSourceSrcFieldPath =
   | `slides.${number}.elements.${number}.source.src`
   | `slides.${number}.backgroundImage.source.src`
-  | "config.brand.avatar.source.src";
+  | "config.brand.avatar.source.src"
+  | "config.theme.backgroundImage.source.src";
 
 export type ImageStyleOpacityFieldPath =
   | `slides.${number}.elements.${number}.style.opacity`
   | `slides.${number}.backgroundImage.style.opacity`
-  | "config.brand.avatar.style.opacity";
+  | "config.brand.avatar.style.opacity"
+  | "config.theme.backgroundImage.style.opacity";
 
 export type ImageStyleObjectFitFieldPath =
   | `slides.${number}.elements.${number}.style.objectFit`;

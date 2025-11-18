@@ -17,6 +17,8 @@ import { CustomIndicatorRadioGroupItem } from "../custom-indicator-radio-group-i
 import { ColorThemeDisplay } from "../color-theme-display";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { Checkbox } from "../ui/checkbox";
+import { ImageFormField } from "@/components/forms/fields/image-form-field";
+import { Button } from "../ui/button";
 
 function PalletteSelector({ form }: { form: DocumentFormReturn }) {
   const { control, setValue } = form;
@@ -112,6 +114,14 @@ export function ThemeForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
   const { watch } = form;
   const isCustom = watch("config.theme.isCustom");
+  const backgroundImageSrc = watch(
+    "config.theme.backgroundImage.source.src"
+  ) as string;
+
+  const resetBackgroundImage = () => {
+    form.resetField("config.theme.backgroundImage");
+  };
+
   return (
     <Form {...form}>
       <form className="space-y-6 w-full py-4">
@@ -137,6 +147,29 @@ export function ThemeForm({}: {}) {
         ) : (
           <PalletteSelector form={form} />
         )}
+        <div className="space-y-4 border rounded-md p-4">
+          <div>
+            <h4 className="text-base font-semibold">Background image</h4>
+            <p className="text-sm text-muted-foreground">
+              Upload or link an image that will sit beneath every slide.
+            </p>
+          </div>
+          <ImageFormField
+            form={form}
+            fieldName={"config.theme.backgroundImage"}
+            label="Custom background"
+          />
+          {backgroundImageSrc ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={resetBackgroundImage}
+            >
+              Remove background image
+            </Button>
+          ) : null}
+        </div>
       </form>
     </Form>
   );

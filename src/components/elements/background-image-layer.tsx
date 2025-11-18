@@ -20,6 +20,7 @@ export function BackgroundImageLayer({
     >
       <img
         alt="background image"
+        src={image.source.src || undefined}
         className={cn("overflow-hidden object-cover w-full h-full")}
         style={{
           opacity: image.style.opacity / 100,

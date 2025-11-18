@@ -75,8 +75,14 @@ export function CommonPage({
       <BackgroundLayer
         background={config.theme.background}
         pattern={overlayPatternSvg}
-        className="-z-20"
+        className="-z-30"
       />
+      {config.theme.backgroundImage?.source.src ? (
+        <BackgroundImageLayer
+          image={config.theme.backgroundImage}
+          className="-z-20"
+        />
+      ) : null}
       {slide.backgroundImage?.source.src ? (
         <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />
       ) : null}
